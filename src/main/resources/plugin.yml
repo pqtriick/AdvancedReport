@@ -1,0 +1,12 @@
+name: AdvancedReport
+version: '${version}'
+main: de.pqtriick.advancedreport.AdvancedReport
+api-version: '1.20'
+
+commands:
+  report:
+  viewreports:
+  cancelreport:
+  rc:
+    aliases: reportchat
+  closereport:
