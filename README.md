@@ -55,6 +55,9 @@ In the plugin directory you will find:
 
 # Pictures
 
+![](https://github.com/pqtriick/AdvancedReport/blob/master/2023-12-10_19.16.47.png)
+![](https://github.com/pqtriick/AdvancedReport/blob/master/2023-12-10_19.29.04.png)
+
     
 
   
