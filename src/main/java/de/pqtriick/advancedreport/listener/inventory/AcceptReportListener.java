@@ -35,6 +35,7 @@ public class AcceptReportListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
+        if (event.getClickedInventory() == null) return;
         PREFIX = PREFIX.replace("&", "§");
         if (event.getView().getTitle().equals(ChatColor.of(new Color(78, 133, 234, 255)) + "ᴏᴘᴇɴ ʀᴇᴘᴏʀᴛꜱ")) {
             event.setCancelled(true);

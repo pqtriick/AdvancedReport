@@ -14,12 +14,14 @@ import de.pqtriick.advancedreport.listener.inventory.AcceptReportListener;
 import de.pqtriick.advancedreport.listener.inventory.MainGUIListener;
 import de.pqtriick.advancedreport.listener.report.QuitListener;
 import de.pqtriick.advancedreport.util.Metrics;
+import de.pqtriick.advancedreport.util.VersionCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AdvancedReport extends JavaPlugin {
 
     public static AdvancedReport instance;
+    public static boolean hasUpdate;
 
     @Override
     public void onEnable() {
@@ -35,6 +37,7 @@ public final class AdvancedReport extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new QuitListener(), this);
 
         Metrics metrics = new Metrics(this, 20538);
+        checkUpdate();
 
     }
 
@@ -54,6 +57,17 @@ public final class AdvancedReport extends JavaPlugin {
         //new DiscordConfig();
 
     }
+    public boolean checkUpdate() {
+        new VersionCheck(this, 114085).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                hasUpdate = false;
+            } else {
+                hasUpdate = true;
+            }
+        });
+        return hasUpdate;
+    }
+
 
 
 }
