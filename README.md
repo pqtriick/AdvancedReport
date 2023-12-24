@@ -12,6 +12,7 @@ This plugin allows you to:
 ## Permissions:
 
 * AR.seereport | To see / close reports
+* AR.admin | For admin stuff
 
 ## Commands:
 
