@@ -41,7 +41,7 @@ public class Viewreports implements CommandExecutor {
             for (Map.Entry<Player, String> map : MainGUIListener.ReportChoice.entrySet()) {
                 Viewinventory.setItem(i, new ItemBuilder(Material.BAMBOO).setName(ChatColor.of(new Color(76, 199, 112)) + "Open Report").setLore(ChatColor.of(new Color(34, 196, 217)) + "Name: " +
                         ChatColor.of(new Color(34, 255, 255)) + map.getKey().getName(), ChatColor.of(new Color(34, 196, 217)) + "Report type: " +
-                        ChatColor.of(new Color(34, 255, 255)) + map.getValue(), "", GUIItemlore3).build());
+                        ChatColor.of(new Color(34, 255, 255)) + map.getValue(), "", GUIItemlore3, "§7§l>> §cRightclick to delete").build());
                 i++;
             }
             p.openInventory(Viewinventory);

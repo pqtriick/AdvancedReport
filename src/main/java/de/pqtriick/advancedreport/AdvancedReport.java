@@ -6,11 +6,10 @@ import de.pqtriick.advancedreport.commands.player.ReportChat;
 import de.pqtriick.advancedreport.commands.team.Closereport;
 import de.pqtriick.advancedreport.commands.team.Viewreports;
 import de.pqtriick.advancedreport.files.*;
-import de.pqtriick.advancedreport.files.configs.DiscordConfig;
 import de.pqtriick.advancedreport.files.configs.MessageConfig;
 import de.pqtriick.advancedreport.files.configs.ReportConfig;
 import de.pqtriick.advancedreport.files.configs.ReportlogConfig;
-import de.pqtriick.advancedreport.listener.inventory.AcceptReportListener;
+import de.pqtriick.advancedreport.listener.inventory.ReportClickListener;
 import de.pqtriick.advancedreport.listener.inventory.MainGUIListener;
 import de.pqtriick.advancedreport.listener.report.QuitListener;
 import de.pqtriick.advancedreport.util.Metrics;
@@ -33,7 +32,7 @@ public final class AdvancedReport extends JavaPlugin {
         this.getCommand("rc").setExecutor(new ReportChat());
         this.getCommand("closereport").setExecutor(new Closereport());
         Bukkit.getPluginManager().registerEvents(new MainGUIListener(), this);
-        Bukkit.getPluginManager().registerEvents(new AcceptReportListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ReportClickListener(), this);
         Bukkit.getPluginManager().registerEvents(new QuitListener(), this);
 
         Metrics metrics = new Metrics(this, 20538);

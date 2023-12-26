@@ -1,18 +1,11 @@
 package de.pqtriick.advancedreport.listener.report;
 
-import de.pqtriick.advancedreport.commands.player.ReportChat;
-import de.pqtriick.advancedreport.listener.inventory.AcceptReportListener;
+import de.pqtriick.advancedreport.listener.inventory.ReportClickListener;
 import de.pqtriick.advancedreport.listener.inventory.MainGUIListener;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
-
-import static de.pqtriick.advancedreport.commands.team.Closereport.*;
 
 import java.util.Map;
 
@@ -30,8 +23,8 @@ public class QuitListener implements Listener {
 
         Player p = event.getPlayer();
         MainGUIListener.ReportChoice.remove(p);
-        AcceptReportListener.inReport.remove(p);
-        for (Map.Entry<Player, Player> map : AcceptReportListener.inReport.entrySet()) {
+        ReportClickListener.inReport.remove(p);
+        for (Map.Entry<Player, Player> map : ReportClickListener.inReport.entrySet()) {
             if (map.getValue().equals(p)) {
                 t = map.getKey();
             }

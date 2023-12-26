@@ -1,8 +1,7 @@
 package de.pqtriick.advancedreport.commands.player;
 
 import de.pqtriick.advancedreport.files.configs.MessageConfig;
-import de.pqtriick.advancedreport.listener.inventory.AcceptReportListener;
-import org.bukkit.Bukkit;
+import de.pqtriick.advancedreport.listener.inventory.ReportClickListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,8 +27,8 @@ public class ReportChat implements CommandExecutor {
         PREFIX = PREFIX.replace("&", "§");
         NOTINREPORT = NOTINREPORT.replace("&", "§");
         Player p = (Player) sender;
-        if (AcceptReportListener.inReport.containsKey(p)) {
-            Player t = AcceptReportListener.inReport.get(p);
+        if (ReportClickListener.inReport.containsKey(p)) {
+            Player t = ReportClickListener.inReport.get(p);
             message = "";
             for (int i = 0; i < args.length; i++) {
                 message = message + " " + args[i];
