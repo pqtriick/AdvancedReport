@@ -1,15 +1,22 @@
 package de.pqtriick.advancedreport.commands.team;
 
 
+import de.pqtriick.advancedreport.AdvancedReport;
 import de.pqtriick.advancedreport.commands.player.ReportChat;
+import de.pqtriick.advancedreport.files.configs.DiscordConfig;
 import de.pqtriick.advancedreport.files.configs.MessageConfig;
 import de.pqtriick.advancedreport.listener.inventory.ReportClickListener;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.awt.*;
 import java.io.File;
 import java.util.Map;
 
@@ -22,6 +29,9 @@ import static de.pqtriick.advancedreport.files.configs.ReportlogConfig.saveLog;
  */
 
 public class Closereport implements CommandExecutor {
+    private JDA bot;
+    private EmbedBuilder eb = new EmbedBuilder();
+    private String channel;
     public static File logfile;
     private static Player t;
 
@@ -71,12 +81,27 @@ public class Closereport implements CommandExecutor {
 
                     }
                 }
+                if (AdvancedReport.hasDCBot) {
+                    bot = AdvancedReport.getJDA();
+                    channel = DiscordConfig.DiscordConfiguration.getString("options.channelid");
+                    eb.setTitle("New Reportlog!");
+                    eb.setAuthor("AdvancedReport", "https://www.spigotmc.org/resources/advancedreport.114085/", "https://mc-heads.net/avatar/" + p.getUniqueId());
+                    eb.setColor(new Color(67, 255, 74));
+                    eb.addField("Reporter", t.getName(), false);
+                    eb.addField("Staff Member", p.getName(), false);
+                    eb.addField("File in directory", "log_" + p.getName() + "_" + System.currentTimeMillis() + ".yml", false);
+                    bot.getTextChannelById(channel).sendMessageEmbeds(eb.build()).queue();
+
+
+
+                }
 
             } else {
                 p.sendMessage(PREFIX + NOTINREPORT);
 
             }
         }
+
         return true;
     }
 
