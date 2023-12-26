@@ -36,7 +36,7 @@ In the plugin directory you will find:
   '5': 'Zitrone_btw:  Message1 | 22:33:39'
   ```
 * Config file to create custom report types
-  Exampe:
+  Example:
     ```
     UIID:
     '12':
@@ -49,6 +49,14 @@ In the plugin directory you will find:
       lore: §7» §9Click to open report
       material: BLUE_CONCRETE
       type: Bug Report
+  ```
+* Discord config for the bot (optional)
+  Example:
+  ```
+  options:
+  enabled: 'true'
+  bottoken: 'YourToken'
+  channelid: 'YourChannelID'
   ```
 * Messages file to edit all messages in the plugin
 
