@@ -27,6 +27,7 @@ public final class AdvancedReport extends JavaPlugin {
     public static AdvancedReport instance;
     public static boolean hasUpdate;
     public static boolean hasDCBot = false;
+    public static String botToken;
     private static JDABuilder builder;
     private static JDA bot;
 
