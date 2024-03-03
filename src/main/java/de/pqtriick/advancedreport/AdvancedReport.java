@@ -13,29 +13,29 @@ import de.pqtriick.advancedreport.files.configs.ReportlogConfig;
 import de.pqtriick.advancedreport.listener.inventory.ReportClickListener;
 import de.pqtriick.advancedreport.listener.inventory.MainGUIListener;
 import de.pqtriick.advancedreport.listener.report.QuitListener;
+import de.pqtriick.advancedreport.util.BotInitializer;
 import de.pqtriick.advancedreport.util.Metrics;
 import de.pqtriick.advancedreport.util.VersionCheck;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Activity;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.security.auth.login.LoginException;
 
 public final class AdvancedReport extends JavaPlugin {
 
     public static AdvancedReport instance;
     public static boolean hasUpdate;
     public static boolean hasDCBot = false;
-    public static String botToken;
-    private static JDABuilder builder;
-    private static JDA bot;
 
     @Override
     public void onEnable() {
         instance = this;
         initConfig();
-        initBot();
+        try {
+            BotInitializer.initBot();
+        } catch (LoginException e) {
+            throw new RuntimeException(e);
+        }
         this.getCommand("report").setExecutor(new Report());
         this.getCommand("viewreports").setExecutor(new Viewreports());
         this.getCommand("cancelreport").setExecutor(new Cancelreporrt());
@@ -79,19 +79,7 @@ public final class AdvancedReport extends JavaPlugin {
         return hasUpdate;
     }
 
-    private void initBot() {
-        if (DiscordConfig.DiscordConfiguration.getString("options.enabled").equalsIgnoreCase("true")) {
-            botToken = DiscordConfig.DiscordConfiguration.getString("options.bottoken");
-            builder = JDABuilder.createDefault(botToken);
-            bot = builder.build();
-            hasDCBot = true;
 
-        }
-    }
-
-    public static JDA getJDA() {
-        return bot;
-    }
 
 
 

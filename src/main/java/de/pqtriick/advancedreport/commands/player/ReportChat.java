@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -19,28 +21,36 @@ import java.util.*;
 public class ReportChat implements CommandExecutor {
 
     public static HashMap<String, UUID> messages = new HashMap<>();
+    private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private static String PREFIX = MessageConfig.MessageConfig.getString("messages.prefix");
     private static String NOTINREPORT = MessageConfig.MessageConfig.getString("messages.notinreport");
     private static String message;
+    private static Player target;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         PREFIX = PREFIX.replace("&", "§");
         NOTINREPORT = NOTINREPORT.replace("&", "§");
-        Player p = (Player) sender;
-        if (ReportClickListener.inReport.containsKey(p)) {
-            Player t = ReportClickListener.inReport.get(p);
-            message = "";
-            for (int i = 0; i < args.length; i++) {
-                message = message + " " + args[i];
-            }
-            t.sendMessage("§9RC §7| §3" + p.getName() + "§7: " + message);
-            p.sendMessage("§9RC §7| §3" + p.getName() + "§7: " + message);
-
-            message = p.getName() + ": " + message + " | " + LocalTime.now().withNano(0);
-            messages.put(message, p.getUniqueId());
-        } else {
-            p.sendMessage(PREFIX + NOTINREPORT);
+        Player player = (Player) sender;
+        message = "";
+        for (int i = 0; i < args.length; i++) {
+            message = message + " " + args[i];
         }
+        if (ReportClickListener.inReport.containsKey(player)) {
+            target = ReportClickListener.inReport.get(player);
+            target.sendMessage("§9RC §7| §3" + player.getName() + "§7: " + message);
+            player.sendMessage("§9RC §7| §3" + player.getName() + "§7: " + message);
+            messages.put(message + " (" + player.getName() + ", " + format.format(new Date()), player.getUniqueId());
+        } else if (ReportClickListener.inReport.containsValue(player)) {
+            for (Map.Entry<Player, Player> entry : ReportClickListener.inReport.entrySet()) {
+                if (entry.getValue() == player) {
+                    target = entry.getKey();
+                }
+            }
+            target.sendMessage("§9RC §7| §3" + player.getName() + "§7: " + message);
+            player.sendMessage("§9RC §7| §3" + player.getName() + "§7: " + message);
+            messages.put(message + " (" + player.getName() + ", " + format.format(new Date()), player.getUniqueId());
+        } else return false;
         return false;
     }
+
 }

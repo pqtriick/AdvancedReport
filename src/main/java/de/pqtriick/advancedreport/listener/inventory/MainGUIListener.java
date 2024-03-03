@@ -38,6 +38,7 @@ public class MainGUIListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         PREFIX = PREFIX.replace("&", "§");
+        NEWREPORT = MessageConfig.MessageConfig.getString("messages.newreport");
         SENTREPORT1 = SENTREPORT1.replace("&", "§");
         SENTREPORT2 = SENTREPORT2.replace("&", "§");
         NEWREPORT = NEWREPORT.replace("&", "§");
@@ -63,6 +64,7 @@ public class MainGUIListener implements Listener {
                                 all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                             }
                         }
+
                     }
                 } else {
                     p.closeInventory();
